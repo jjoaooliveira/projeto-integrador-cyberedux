@@ -1,0 +1,26 @@
+@media (min-width: 280px) {
+    .row {
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: nowrap;
+        height: 320px;
+    }
+    
+}
+
+@media (min-width: 780px) {
+    .row {
+        flex-direction: row;
+        height: auto;
+    }
+    .col {
+        height: 180px;
+    }
+}
+
+    
+
+.hover:hover {
+    background-color: rgba(156, 156, 156, 0.737) !important;
+}
+

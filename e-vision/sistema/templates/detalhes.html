@@ -1,0 +1,36 @@
+{% extends "base-sistema/base.html" %}
+{% load static %}
+
+{% block title %}
+<link rel="stylesheet" href="{% static 'css/detalhes.css' %}">
+  
+<div class="title">
+    <h1>{{turma}}</h1> 
+</div>
+<hr>
+{% endblock title %}
+
+{% block content %}
+
+<div class="container justify-content-center m-auto mt-5 mb-5">
+        <div class="d-flex gap-2 flex-wrap p-3">
+            {% for aluno in alunos %}
+                <div class="container aluno mb-4 shadow rounded-3">
+                    <h2>{{ aluno.nome }}</h2>
+                    <small>{{ aluno.cpf }}</small>
+                    <button class="btn btn-info"><a class="text-decoration-none text-white" href="{% url 'aluno' aluno.id_aluno %}">Detalhes</a></button>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <div class="d-flex justify-content-evenly">
+            <a href="{% url 'aulas' turma.id %}" class="d-block rounded-3 text-bg-primary p-3 text-decoration-none">
+                <h6>Aulas</h6>
+            </a>
+            <a href="{% url 'presencas' turma.id %}" class="d-block rounded-3 text-bg-primary p-3 text-decoration-none">
+                <h6>Presença</h6>
+            </a>
+        </div>  
+    </div>
+
+{% endblock content %}

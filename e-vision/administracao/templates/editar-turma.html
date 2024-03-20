@@ -1,0 +1,15 @@
+{% extends "base-administracao/base.html" %}
+
+{% block content %}
+
+<div class="container shadow rounded mt-4 mb-4 p-5">
+    <h1>Editar Turma - {{turma}}</h1>
+    <hr>
+    <form action="{% url 'editar-turma' turma.id %}" method="post">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit" class="btn btn-primary mt-3">Atualizar</button>
+    </form>
+</div>
+
+{% endblock content %}

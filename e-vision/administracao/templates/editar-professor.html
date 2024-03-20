@@ -1,0 +1,15 @@
+{% extends "base-administracao/base.html" %}
+
+{% block content %}
+
+<div class="container shadow rounded mt-4 mb-4 p-5">
+    <h1>Editar Professor - {{professor}}</h1>
+    <hr>
+    <form action="{% url 'editar-professor' professor.id %}" method="post">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit" class="btn btn-primary">Atualizar</button>
+    </form>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,123 @@
+{% extends "base-administracao/lista.html" %}
+{% load static %}
+
+{% block title %}
+<header class="d-flex justify-content-between m-2">
+    <h1>Usuarios</h1>
+    <button class="btn btn-primary">
+        <a class="text-decoration-none text-white" href="{% url 'cadastro-usuario' %}">Novo Usuario</a>
+    </button>
+</header>
+<hr>
+{% endblock title %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/lista.css' %}">
+
+    <div class="container m-auto overflow-auto" >
+        <dialog id="teste" class="rounded border-0 p-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <h4>Editar Usuário</h4>
+                <button class="btn-close"></button>
+            </div>
+            <hr>
+            <div class="mt-2 container">
+                <form action="{% url 'editar-usuario' %}" method="post" id="formmodal">
+                    {% csrf_token %}
+                    <div class="vstack mb-4">
+                        <label for="nome" class="form-label">ID</label>
+                        <input type="number" name="id_user" class="modalforminput form-control" readonly="readonly">
+                    </div>
+                    <div class="mb-4">
+                        <label for="nome" class="form-label">Nome de Usuario</label>
+                        {{ form.username }}
+                    </div>
+                    <div class="mb-4">
+                        <label for="nome" class="form-label">Email</label>
+                        {{form.email}}
+                    </div>
+                    <div class="mb-4">
+                        <label for="nome">Primeiro Nome</label>
+                        {{form.first_name}}
+                    </div>
+                    <div class="mb-4">
+                        <label for="nome">Ultimo Nome</label>
+                        {{form.last_name}}
+                    </div>
+                    <div class="mb-4">
+                        {{form.is_staff}}
+                        <label for="nome" class="form-check-label">Staff</label>
+                    </div>
+                    <button class="btn btn-primary" type="submit" formmethod="post">confirmar</button>
+                </form>
+            </div>
+        </dialog>
+        <table class="table table-hover p-4">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Primeiro Nome</th>
+                    <th scope="col">Segundo Nome</th>
+                    <th scope="col">Staff</th>
+                    <th scope="col">Registrado em</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                {% for usuario in usuarios %}
+                <tr id="row-{{usuario.id}}">
+                    <th scope="row">{{ usuario.id }}</th>
+                    <td id="nome-{{usuario.id}}">{{ usuario.username }}</td>
+                    <td id="email-{{usuario.id}}">{{ usuario.email }}</td>
+                    <td id="fn-{{usuario.id}}">{{ usuario.first_name }}</td>
+                    <td id="ln-{{usuario.id}}">{{ usuario.last_name }}</td>
+                    <td id="ist-{{usuario.id}}">{{ usuario.is_staff }}</td>
+                    <td id="dtj-{{usuario.id}}">{{ usuario.date_joined }}</td>
+                    <td>
+                        <button class="openmodal border-0 btn btn-outline-success" name="trigger" value="{{usuario.id}}">Editar</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {{usuarios|json_script:"usuarios-json"}}
+
+    <Script>
+        botoes = document.querySelectorAll('.openmodal');
+        modalForm = document.querySelector('#teste');
+        usuarios = JSON.parse(document.getElementById('usuarios-json').textContent);
+        botoes.forEach(element => {
+
+            element.addEventListener('click', (e) => {
+                const botoesValue = Number(e.target.value);
+                usuario = usuarios.find( usuario =>  usuario.id === botoesValue );
+                modalForm.showModal();
+                modalInputs(usuario)
+            })
+        });
+
+        modalInputs = (dados) => {
+            let i = 0;
+            inputs = document.querySelectorAll('.modalforminput');
+            const teste = [] 
+
+            for (const key in usuario) {
+                teste.push(usuario[key])
+            }
+            console.log(teste)
+            
+            inputs.forEach(element => {
+                if (element.type === 'checkbox') {
+                    element.checked = teste[i]
+                } else {
+                    element.value = teste[i]
+                }
+                i += 1
+                
+            })
+        }
+    </Script>
+{% endblock content %}

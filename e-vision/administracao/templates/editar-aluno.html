@@ -1,0 +1,14 @@
+{% extends "base-administracao/base.html" %}
+
+{% block content %}
+<div class="border rounded container mt-4 mb-4 m-auto p-4">
+    <h1>Editar Aluno - {{aluno.nome}}</h1>
+    <hr>
+    <form action="{% url 'editar-aluno' aluno.id_aluno %}" method="post">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit" class="btn btn-primary mt-3">Atualizar</button>
+    </form>
+</div>
+
+{% endblock content %}

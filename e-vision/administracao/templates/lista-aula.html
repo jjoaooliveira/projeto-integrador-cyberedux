@@ -1,0 +1,38 @@
+{% extends "base-administracao/lista.html" %}
+
+{% block title %}
+<header class="d-flex justify-content-between m-3">
+    <h1>Professores</h1>
+</header>
+<hr>
+{% endblock title %}
+
+{% block content %}
+    <div class="container m-auto overflow-x-auto" >
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Turma</th>
+                    <th scope="col">Professor</th>
+                    <th scope="col">Data</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                {% for aula in aulas %}
+                <tr>
+                    <th scope="row">{{ aula.id }}</th>
+                    <td>{{ aula.turma }}</td>
+                    <td>{{ aula.professor }}</td>
+                    <td>{{ aula.data }}</td>
+                    <td>
+                        <a class="text-decoration-none" href="{% url 'deletar-aula' aula.id %}">
+                            <button class="border-0 btn btn-outline-danger" type="button">Deletar</button>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}

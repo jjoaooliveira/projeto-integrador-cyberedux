@@ -1,0 +1,14 @@
+{% extends "base-administracao/cadastro.html" %}
+
+
+{% block content %}
+    <div class="container">
+        <h1>Cadastrar Turma</h1>
+        <hr>
+        <form action="{% url 'cadastro-usuario' %}" method="post" >
+            {% csrf_token %}
+            {{form}}
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
+    </div>
+{% endblock content %}

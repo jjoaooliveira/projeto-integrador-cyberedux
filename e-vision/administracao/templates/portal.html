@@ -1,0 +1,44 @@
+{% extends "base-administracao/base.html" %}
+{% load static %}
+
+<head>
+    <title>Portal | Inicio</title>
+</head>
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/portal.css' %}">
+<div class="container mt-5">
+
+    <div class="row w-75 m-auto m-4 justify-content-center align-content-end gap-3">
+
+        <a class="text-decoration-none col d-flex bg-primary-subtle align-items-center justify-content-center rounded-1 hover text-center" href="{% url 'professores' %}">
+            <h4 class="text-black w-100">Professores</h4>
+        </a>
+
+        <a class="text-decoration-none col d-flex bg-primary-subtle align-items-center justify-content-center rounded-1 hover text-center" href="{% url 'usuarios' %}">
+            <h4 class="text-black w-100">Usuarios</h4>
+        </a>
+
+        <a class="text-decoration-none col d-flex bg-primary-subtle align-items-center justify-content-center rounded-1 hover text-center" href="{% url 'aulas' %}">
+            <h4 class="text-black w-100">Aulas</h4>
+        </a>
+
+    </div>
+
+    <div class="row w-75 m-auto mt-3 justify-content-center align-content-start gap-3">
+        <a class="text-decoration-none col d-flex bg-primary-subtle align-items-center justify-content-center rounded-1 hover text-center" href="{% url 'alunos' %}">
+            <h4 class="text-black w-100">Alunos</h4>
+        </a>
+        
+        <a class="text-decoration-none col d-flex bg-primary-subtle align-items-center justify-content-center rounded-1 hover text-center" href="{% url 'turmas' %}">
+            <h4 class="text-black w-100">Turmas</h4>
+        </a>
+        
+        <a class="text-decoration-none col d-flex bg-primary-subtle align-items-center justify-content-center rounded-1 hover text-center" href="{% url 'painel' %}">
+            <h4 class="text-black w-100">E-Dash</h4>
+        </a>
+
+    </div>
+</div>
+
+{% endblock content %}

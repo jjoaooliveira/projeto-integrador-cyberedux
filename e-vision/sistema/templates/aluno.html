@@ -1,0 +1,43 @@
+{% extends "base-sistema/base.html" %}
+{% load plotly_dash %}
+
+{% block title %}
+{% endblock title %}
+
+{% block content %}
+    <div class="container m-auto overflow-x-auto" >
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">CPF</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Endereço</th>
+                    <th scope="col">telefone</th>
+                    <th scope="col">Condição Financeira</th>
+                    <th scope="col">Escolaridade</th>
+                    <th scope="col">Trabalha</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider"> 
+                <tr>
+                    <th scope="row">{{ aluno.id_aluno }}</th>
+                    <td>{{ aluno.nome }}</td>
+                    <td>{{ aluno.cpf }}</td>
+                    <td>{{ aluno.email }}</td>
+                    <td>{{ aluno.endereco }}</td>
+                    <td>{{ aluno.telefone }}</td>
+                    <td>{{ aluno.condicao_financeira }}</td>
+                    <td>{{ aluno.escolaridade }}</td>
+                    <td>{{ aluno.trabalha }}</td>
+                </tr>   
+            </tbody>
+        </table>
+</div>
+    <div>
+        {% plotly_header %}
+        {% plotly_app name="SimpleExample" ratio=1 %}
+        {% plotly_footer %}
+    </div>
+{% endblock content %}

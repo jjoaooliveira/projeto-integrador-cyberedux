@@ -1,0 +1,58 @@
+{% extends "base-administracao/lista.html" %}
+{% load static %}
+
+{% block title %}
+<header class="d-flex justify-content-between m-3">
+    <h1>Alunos</h1>
+    <button class="btn btn-primary">
+        <a class="text-decoration-none text-white" href="{% url 'cadastro-aluno' %}">Novo Aluno</a>
+    </button>
+</header>
+<hr>
+{% endblock title %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/lista.css' %}">
+    <div class="container m-auto overflow-x-auto" >
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">CPF</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Endereço</th>
+                    <th scope="col">telefone</th>
+                    <th scope="col">Condição Financeira</th>
+                    <th scope="col">Escolaridade</th>
+                    <th scope="col">Trabalha</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                {% for aluno in alunos %}
+                <tr>
+                    <th scope="row">{{ aluno.id_aluno }}</th>
+                    <td>{{ aluno.nome }}</td>
+                    <td>{{ aluno.cpf }}</td>
+                    <td>{{ aluno.email }}</td>
+                    <td>{{ aluno.endereco }}</td>
+                    <td>{{ aluno.telefone }}</td>
+                    <td>{{ aluno.condicao_financeira }}</td>
+                    <td>{{ aluno.escolaridade }}</td>
+                    <td>{{ aluno.trabalha }}</td>
+                    <td>
+                        <a class="text-decoration-none" href="{% url 'editar-aluno' aluno.id_aluno %}">
+                            <button class="border-0 btn btn-outline-primary" type="button">Editar</button>
+                        </a>
+                    </td>
+                    <td>
+                        <a class="text-decoration-none" href="{% url 'deletar-aluno' aluno.id_aluno %}">
+                            <button class="border-0 btn btn-outline-danger" type="button">Deletar</button>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}

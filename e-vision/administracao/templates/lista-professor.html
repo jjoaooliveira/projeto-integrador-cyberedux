@@ -1,0 +1,50 @@
+{% extends "base-administracao/lista.html" %}
+
+{% block title %}
+<header class="d-flex justify-content-between m-3">
+    <h1>Professores</h1>
+    <button class="btn btn-primary">
+        <a class="text-decoration-none text-white" href="{% url 'cadastro-professor' %}">Novo Professor</a>
+    </button>
+</header>
+<hr>
+{% endblock title %}
+
+{% block content %}
+    <div class="container m-auto overflow-x-auto" >
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">CPF</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Endereço</th>
+                    <th scope="col">telefone</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                {% for professor in professores %}
+                <tr>
+                    <th scope="row">{{ professor.id }}</th>
+                    <td>{{ professor.nome }}</td>
+                    <td>{{ professor.cpf }}</td>
+                    <td>{{ professor.email }}</td>
+                    <td>{{ professor.endereco }}</td>
+                    <td>{{ professor.telefone }}</td>
+                    <td>
+                        <a class="text-decoration-none" href="{% url 'editar-professor' professor.id %}">
+                            <button class="border-0 btn btn-outline-primary" type="button">Editar</button>
+                        </a>
+                    </td>
+                    <td>
+                        <a class="text-decoration-none" href="{% url 'deletar-professor' professor.id %}">
+                            <button class="border-0 btn btn-outline-danger" type="button">Deletar</button>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}

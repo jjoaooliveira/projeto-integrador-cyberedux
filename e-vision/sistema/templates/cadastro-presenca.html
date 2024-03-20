@@ -1,0 +1,14 @@
+{% extends "base-sistema/base.html" %}
+
+{% block content %}
+
+    <div class="container shadow rounded mt-4 mb-4 p-5">    
+        <h1>Cadastrar Presença</h1>
+        <hr>
+        <form action="{% url 'cadastro-presenca' turma aula %}" method="post">
+            {% csrf_token %}
+            {{form}}
+            <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
+        </form>
+    </div>
+{% endblock content %}

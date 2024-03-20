@@ -1,0 +1,8 @@
+a {
+    text-transform: uppercase;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(0, 255, 255, 0.564);
+    /* color: white ;     */
+}

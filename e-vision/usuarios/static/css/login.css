@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+@media (max-width: 580px) {
+    .container-curso {
+        max-width: 90%;
+        min-width: 280px;
+    }
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.container-curso {
+    font-family: 'Roboto', sans-serif;
+    padding: 1.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.515);
+    border-radius: 8px;
+    margin: 24px auto;
+    width: 480px;
+}
+
+

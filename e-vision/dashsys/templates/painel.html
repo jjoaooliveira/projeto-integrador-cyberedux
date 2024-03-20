@@ -1,0 +1,10 @@
+{% extends "base-administracao/base.html" %}
+{% load plotly_dash %}
+
+
+{% block content %}
+    <div class="container">
+        <h1>E-Vision</h1>
+        {% plotly_app name="SimpleExample" ratio=1 %}
+    </div>
+{% endblock content %}
