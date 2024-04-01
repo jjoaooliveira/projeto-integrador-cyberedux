@@ -25,4 +25,4 @@ E-Vision é um sistema de gestão acadêmica com recursos únicos. O sistema per
 <!-- Coloque seu nome, uma foto sua e uma pequena bio sobre você na seguinte tabela: -->
 |  |  |
 |:-------------:|:------------------------------------------------------------:|
-|  <img src="img/profilepic.png" width="150px"></br> **João Oliveira** | Meu nome é João Oliveira, sou estudante de Ciência da Computação, autodidata e apaixonado por tecnologia. Atualmente focado no desenvolvimento Web, utilizo tecnologias como Javascript, Python, Django, Node.js e Postgresql. Estou sempre buscando me aperfeiçoar. |
+|  <img src="https://github.com/jjoaooliveira.png" width="150px"></br> **João Oliveira** | Meu nome é João Oliveira, sou estudante de Ciência da Computação, autodidata e apaixonado por tecnologia. Atualmente focado no desenvolvimento Web, utilizo tecnologias como Javascript, Python, Django, Node.js e Postgresql. Estou sempre buscando me aperfeiçoar. |
