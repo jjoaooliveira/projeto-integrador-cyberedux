@@ -1,7 +1,7 @@
 {% extends "base-administracao/lista.html" %}
 {% block title %}
 <header class="d-flex justify-content-between m-3">
-    <h1>Professores</h1>
+    <h1>Turmas</h1>
     <button class="btn btn-primary">
         <a class="text-decoration-none text-white" href="{% url 'cadastro-turma' %}">Nova Turma</a>
     </button>
@@ -15,6 +15,7 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
+                    <th scope="col">Professor</th>
                     <th scope="col">Periodo</th>
                     <th scope="col">Ano</th>
                     <th scope="col">QTD Vagas</th>
@@ -26,14 +27,17 @@
                 {% for turma in turmas %}
                 <tr>
                     <th scope="row">{{ turma.id }}</th>
+                    <td>{{ turma.professor }}</td>
                     <td>{{ turma.periodo }}</td>
                     <td>{{ turma.ano }}</td>
                     <td>{{ turma.qtd_vagas }}</td>
                     <td>{{ turma.disciplina }}</td>
-                    <td>
-                        {% for aluno in turma.alunos.all %}
-                            {{aluno}} /
-                        {% endfor %}
+                    <td> 
+                        <ul class="d-block overflow-y-scroll overflow-hidden" style="height: 70px;">
+                            {% for aluno in turma.alunos.all %}
+                                <li>{{aluno}}</li>
+                            {% endfor %}
+                        </ul>
                     </td>
                     <td>
                         <a class="text-decoration-none" href="{% url 'editar-turma' turma.id %}">

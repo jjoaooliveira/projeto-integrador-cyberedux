@@ -6,8 +6,11 @@
         <h1>Cadastrar Aula</h1>
         <hr>
         <form action="{% url 'cadastro-aula' turma %}" method="post">
-            {% csrf_token %}
-            {{form}}
+            <div class="form-content mb-3">
+                <label for="data">Data*</label>
+                <input name="data" type="date" id="data" class="form-control mt-2">
+                <span>Esse campo é obrigatório...</span>
+            </div>
             <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
         </form>
     </div>

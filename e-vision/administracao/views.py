@@ -1,13 +1,12 @@
-import json
 from django.contrib.admin.views.decorators import staff_member_required
-from django.contrib.auth.decorators import login_required
+from django.forms import ValidationError
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth.models import User
 from .forms import FormAluno, FormProfessor, FormChangeUser, FormCreationUser, FormTurma
-from sistema.models import Aluno, Aula, Professor, Turma 
+from sistema.models import Aluno, Aula, Disciplina, Professor, Turma 
 
 @staff_member_required(login_url='login')
 def portal(request):
@@ -17,6 +16,7 @@ def portal(request):
 # professor
 @staff_member_required(login_url='login')
 def lista_professor(request):
+
     professores = Professor.objects.all()
     form = FormProfessor()
     return render(request, 'lista-professor.html', {'professores': professores, 'form': form})
@@ -25,21 +25,23 @@ def lista_professor(request):
 @staff_member_required(login_url='login')
 def editar_professor(request, professor_id):
     professor = Professor.objects.get(pk=professor_id)
-    form = FormProfessor(request.POST or None, instance=professor)
+    
+    if request.method == 'POST':
+        form = FormProfessor(request.POST, instance=professor)
+        print(form)
+        if form.is_valid():
+            form.save()
+            return redirect('professores')
 
-    if form.is_valid():
-        form.save()
-        
-        return HttpResponseRedirect(reverse('professores'))
-
-    return render(request, 'editar-professor.html', {'form': form, 'professor': professor})
+    professores_usuarios = Professor.objects.values_list('user', flat=True)
+    usuarios = User.objects.exclude(id__in=professores_usuarios).exclude(is_superuser=True)
+    return render(request, 'editar-professor.html', {'professor': professor, 'usuarios': usuarios})
 
 
 @staff_member_required(login_url='login')
 def delete_professor(request, professor_id):
     professor = Professor.objects.get(pk=professor_id)
     professor.delete()
-
     return HttpResponseRedirect(reverse('professores'))
 
     
@@ -48,18 +50,20 @@ def cadastro_professor(request):
     
     if request.method == 'POST':
         form = FormProfessor(request.POST)
-
+        
         if form.is_valid():
             form.save()
-    
-            return HttpResponseRedirect(reverse('professores'))
+            return redirect('professores')
 
-    form = FormProfessor()
-    return render(request, 'cadastro-professor.html', {'form': form})
+    professores_usuarios = Professor.objects.values_list('user', flat=True)
+    usuarios = User.objects.exclude(id__in=professores_usuarios).exclude(is_superuser=True)
+    return render(request, 'cadastro-professor.html', {'usuarios': usuarios})
+
 
 # Usuario
 @staff_member_required(login_url='login')
 def lista_usuario(request):
+
     usuarios = list(User.objects.all().values('id', 'username', 'email', 'first_name', 'last_name', 'is_staff', 'date_joined'))
     
     form = FormChangeUser()
@@ -104,14 +108,15 @@ def lista_aluno(request):
 @staff_member_required(login_url='login')
 def editar_aluno(request, aluno_id):
     aluno = Aluno.objects.get(pk=aluno_id)
+    escolaridade = Aluno.Escolaridade.choices
+    condicoes = Aluno.CondicaoFinanceira.choices
     form = FormAluno(request.POST or None, instance=aluno)
     
     if form.is_valid():
         form.save()
-        print('oi')
         return redirect('alunos')
 
-    return render(request, 'editar-aluno.html', {'aluno': aluno, 'form': form})
+    return render(request, 'editar-aluno.html', {'aluno': aluno, 'escolaridades': escolaridade, 'condicoes': condicoes})
 
 
 @staff_member_required(login_url='login')
@@ -122,33 +127,37 @@ def cadastro_aluno(request):
 
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('alunos'))
-        
-    form = FormAluno()
-    return render(request, 'cadastro-aluno.html', {'form': form})
+            return redirect('alunos')
+
+    escolaridade = Aluno.Escolaridade.choices
+    condicoes = Aluno.CondicaoFinanceira.choices
+    return render(request, 'cadastro-aluno.html', {'escolaridades': escolaridade, 'condicoes': condicoes})
 
 
 @staff_member_required(login_url='login')
 def delete_aluno(request, aluno_id):
+    
     aluno = Aluno.objects.get(pk=aluno_id)
     aluno.delete()
-
     return HttpResponseRedirect(reverse('alunos'))
 
 
-@staff_member_required(login_url='login')
 # turma
+@staff_member_required(login_url='login')
 def cadastro_turma(request):
     
     if request.method == 'POST':
         form = FormTurma(request.POST)
+
         if form.is_valid():
             form.save()
-                
             return redirect('turmas')
 
-    form = FormTurma()
-    return render(request, 'cadastro-turma.html', {'form': form})
+    disciplinas = Disciplina.objects.all()
+    alunos = Aluno.objects.all()
+    professores = Professor.objects.all()
+
+    return render(request, 'cadastro-turma.html', {'disciplinas': disciplinas, 'alunos': alunos, 'professores': professores})
 
 
 @staff_member_required(login_url='login')
@@ -160,6 +169,10 @@ def lista_turma(request):
 @staff_member_required(login_url='login')
 def editar_turma(request, turma_id):
     turma = Turma.objects.get(pk=turma_id)
+    disciplinas = Disciplina.objects.exclude(id=turma.disciplina.id)
+    professores = Professor.objects.exclude(id=turma.professor.id)
+    turma_alunos = Turma.objects.filter(id=turma_id).values_list('alunos', flat=True)
+    alunos = Aluno.objects.exclude(id_aluno__in=turma_alunos)
     form = FormTurma(request.POST or None, instance=turma)
  
     if form.is_valid():
@@ -167,7 +180,7 @@ def editar_turma(request, turma_id):
         # messages.sucess()
         return redirect('turmas')
 
-    return render(request, 'editar-turma.html', {'form': form, 'turma': turma})
+    return render(request, 'editar-turma.html', {'disciplinas': disciplinas, 'turma': turma, 'professores': professores, 'alunos': alunos})
 
 
 @staff_member_required(login_url='login')

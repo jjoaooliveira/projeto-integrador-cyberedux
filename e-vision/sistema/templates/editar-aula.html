@@ -7,7 +7,11 @@
     <hr>
     <form action="{% url 'editar-aula' turma aula.id %}" method="post">
         {% csrf_token %}
-        {{form}}
+        <div class="form-content mb-3">
+            <label for="data">Data*</label>
+            <input name="data" type="date" id="data" class="form-control mt-2" value="{{aula.data}}">
+            <span>Esse campo é obrigatório...</span>
+        </div>
         <button type="submit" class="btn btn-primary mt-3">Atualizar</button>
     </form>
 </div>

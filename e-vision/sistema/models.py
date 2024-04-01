@@ -6,7 +6,7 @@ class Professor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE) # associar User do sistema
     nome = models.CharField(max_length=128, blank=False)
     cpf = models.CharField(max_length=11, blank=False)
-    email = models.CharField(max_length=128, blank=False)
+    email = models.CharField(max_length=128, blank=True)
     endereco = models.CharField(max_length=128, blank=True)
     telefone = models.CharField(max_length=22, blank=False)
 
@@ -37,8 +37,6 @@ class Aluno(models.Model):
     email = models.EmailField(max_length=128, blank=False)
     endereco = models.CharField(max_length=128, blank=True)
     telefone = models.CharField(max_length=22, blank=False)
-    
-    # campos p/ coleta de dados
     condicao_financeira = models.CharField(max_length=1, choices=CondicaoFinanceira.choices, null=True)
     escolaridade = models.CharField(max_length=3, choices=Escolaridade.choices, null=True)
     trabalha =  models.BooleanField(null=False)

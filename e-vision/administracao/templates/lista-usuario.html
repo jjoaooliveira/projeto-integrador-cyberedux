@@ -15,17 +15,17 @@
 <link rel="stylesheet" href="{% static 'css/lista.css' %}">
 
     <div class="container m-auto overflow-auto" >
-        <dialog id="teste" class="rounded border-0 p-3">
-            <div class="d-flex justify-content-between align-items-center">
+        <dialog id="modal" class="rounded border-0">
+            <section class="d-flex justify-content-between align-items-center">
                 <h4>Editar Usuário</h4>
-                <button class="btn-close"></button>
-            </div>
+                <button class="btn-close" id="closemodal"></button>
+            </section>
             <hr>
-            <div class="mt-2 container">
+            <div class="mt-2 container p-3">
                 <form action="{% url 'editar-usuario' %}" method="post" id="formmodal">
                     {% csrf_token %}
-                    <div class="vstack mb-4">
-                        <label for="nome" class="form-label">ID</label>
+                    <div class="mb-4">
+                        <label for="id_user" class="form-label">ID</label>
                         <input type="number" name="id_user" class="modalforminput form-control" readonly="readonly">
                     </div>
                     <div class="mb-4">
@@ -48,7 +48,7 @@
                         {{form.is_staff}}
                         <label for="nome" class="form-check-label">Staff</label>
                     </div>
-                    <button class="btn btn-primary" type="submit" formmethod="post">confirmar</button>
+                    <button class="btn btn-primary" type="submit" formmethod="post">Atualizar</button>
                 </form>
             </div>
         </dialog>
@@ -86,9 +86,10 @@
     {{usuarios|json_script:"usuarios-json"}}
 
     <Script>
-        botoes = document.querySelectorAll('.openmodal');
-        modalForm = document.querySelector('#teste');
-        usuarios = JSON.parse(document.getElementById('usuarios-json').textContent);
+        const botoes = document.querySelectorAll('.openmodal');
+        const btnClose = document.getElementById('closemodal')
+        const modalForm = document.getElementById('modal');
+        const usuarios = JSON.parse(document.getElementById('usuarios-json').textContent);
         botoes.forEach(element => {
 
             element.addEventListener('click', (e) => {
@@ -101,7 +102,7 @@
 
         modalInputs = (dados) => {
             let i = 0;
-            inputs = document.querySelectorAll('.modalforminput');
+            const inputs = document.querySelectorAll('.modalforminput');
             const teste = [] 
 
             for (const key in usuario) {
@@ -111,13 +112,17 @@
             
             inputs.forEach(element => {
                 if (element.type === 'checkbox') {
-                    element.checked = teste[i]
+                    element.checked = teste[i];
                 } else {
-                    element.value = teste[i]
+                    element.value = teste[i];
                 }
-                i += 1
+                i += 1;
                 
             })
         }
+
+        btnClose.addEventListener('click', () => {
+            modalForm.close();
+        })
     </Script>
 {% endblock content %}

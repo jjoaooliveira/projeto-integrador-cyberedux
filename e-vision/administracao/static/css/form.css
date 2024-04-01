@@ -1,0 +1,23 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+}
+
+.erro input {
+    border: 1px solid red;
+}
+
+.erro select {
+    border-color: red;
+}
+
+.form-content.erro span {
+    color: red;
+    visibility: inherit;
+}
+
+.form-content span{
+    visibility: hidden;
+}
+
+

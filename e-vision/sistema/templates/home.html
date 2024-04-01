@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
     {% for turma in turmas %}
     <a class="text-decoration-none text-black" href="{% url 'turma' turma.id %}">
-        <div class="container container-curso rounded shadow-lg border-0 p-4 mb-4">
+        <div class="container container-curso rounded border p-4 mb-4">
                 <h2 class="fw-bold">{{ turma }}</h2>
                 <small class="fw-light me-3"> Professor(a): {{ turma.professor }} </small>
                 <small class="fw-light me-3"> Alunos: {{ turma.alunos.all.count }} </small>

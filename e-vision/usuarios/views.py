@@ -9,8 +9,8 @@ from .forms import LoginForm
 def sign_in(request):
     if request.user.is_authenticated:
         if request.user.is_staff:
-                    return HttpResponseRedirect(reverse('portal'))
-        return HttpResponseRedirect('home')
+                    return redirect('portal')
+        return redirect('home')
     
     if request.method == 'POST':
         form = LoginForm(request.POST)

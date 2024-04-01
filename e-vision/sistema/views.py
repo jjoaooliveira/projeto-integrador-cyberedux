@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
-from .models import Aluno, Presenca, Turma, Aula
+from .models import Aluno, Presenca, Professor, Turma, Aula
 from .forms import FormAula, FormPresenca
 # from django.contrib.auth.models import User
 
@@ -77,14 +77,13 @@ def aluno(request, aluno_id):
 
 @login_required(login_url='login')
 def cadastro_aula(request, turma_id):
-    
     if request.method == 'POST':
         form = FormAula(request.POST)
 
         if form.is_valid():
             aula = Aula(
                 turma=Turma.objects.get(pk=turma_id),
-                professor=form.cleaned_data['professor'],
+                professor=Professor.objects.get(user=request.user),
                 data=form.cleaned_data['data']
             )
             aula.save()
@@ -111,4 +110,4 @@ def editar_aula(request, aula_id, turma_id):
 
         return redirect(reverse('aulas', args=[turma_id]))
 
-    return render(request, 'editar-aula.html', {'form': form, 'turma': turma_id, 'aula': aula})
+    return render(request, 'editar-aula.html', {'turma': turma_id, 'aula': aula})

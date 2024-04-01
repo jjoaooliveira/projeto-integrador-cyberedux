@@ -16,15 +16,6 @@ class FormCreationUser(UserCreationForm):
             'password2',
             'is_staff',
         ]
-        widgets = {
-            'username': forms.TextInput(attrs={'class': 'form-control mb-3'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control mb-3'}),
-            'first_name': forms.TextInput(attrs={'class': 'form-control mb-3'}),
-            'last_name': forms.TextInput(attrs={'class': 'form-control mb-3'}),
-            'password1': forms.PasswordInput(attrs={'class': 'form-control mb-3'}),
-            'is_staff': forms.CheckboxInput(attrs={'class': 'form-check-input mb-3'}),
-        }
-
 
 class FormChangeUser(UserChangeForm):
     class Meta:
@@ -55,14 +46,6 @@ class FormProfessor(forms.ModelForm):
             'endereco',
             'telefone'
         ]
-        widgets = {
-            'user': forms.Select(attrs={'class': 'modalforminput form-select mb-3', 'readonly':'readonly'}),
-            'nome': forms.TextInput(attrs={'class':'modalforminput form-control mb-3'}),
-            'cpf': forms.TextInput(attrs={'class':'modalforminput form-control mb-3'}),
-            'email': forms.TextInput(attrs={'class':'modalforminput form-control mb-3'}),
-            'endereco': forms.TextInput(attrs={'class':'modalforminput form-control mb-3'}),
-            'telefone': forms.TextInput(attrs={'class':'modalforminput form-control mb-3'}),
-        }
 
 class FormAluno(forms.ModelForm):
     class Meta:
@@ -77,15 +60,6 @@ class FormAluno(forms.ModelForm):
             'escolaridade',
             'trabalha'
         ]
-        widgets = {
-            'nome': forms.TextInput(attrs={'class': 'form-control mb-3'}),
-            'cpf' : forms.TextInput(attrs={'class': 'form-control mb-3'}),
-            'email' : forms.EmailInput(attrs={'class': 'form-control mb-3'}),
-            'endereco' : forms.TextInput(attrs={'class': 'form-control mb-3'}),
-            'telefone' : forms.TextInput(attrs={'class': 'form-control mb-3'}),
-            'condicao_financeira' : forms.RadioSelect(attrs={'class': 'mb-3'}, choices=Aluno.CondicaoFinanceira),
-            'escolaridade' : forms.Select(attrs={'class': 'form-select mb-3'}, choices=Aluno.Escolaridade),
-            }
 
 class FormTurma(forms.ModelForm):
     class Meta:
@@ -98,12 +72,3 @@ class FormTurma(forms.ModelForm):
             'professor',
             'alunos',
         ]
-        widgets = {
-            'periodo': forms.NumberInput(attrs={'class': 'form-control mb-3'}),
-            'ano': forms.NumberInput(attrs={'class': 'form-control mb-3'}),
-            'qtd_vagas': forms.NumberInput(attrs={'class': 'form-control mb-3'}),
-            'disciplina': forms.Select(attrs={'class':'form-select mb-3'}),
-            'professor': forms.Select(attrs={'class':'form-select mb-3'}),
-            'alunos': forms.SelectMultiple(attrs={'class':'form-select mb-3'}),
-        }
-

@@ -1,10 +1,11 @@
 {% extends "base-administracao/base.html" %}
+{% load static %}
 {% load plotly_dash %}
 
-
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/painel.css' %}">
+
     <div class="container">
-        <h1>E-Vision</h1>
         {% plotly_app name="SimpleExample" ratio=1 %}
     </div>
 {% endblock content %}

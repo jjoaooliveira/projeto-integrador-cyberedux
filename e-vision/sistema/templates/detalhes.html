@@ -4,7 +4,7 @@
 {% block title %}
 <link rel="stylesheet" href="{% static 'css/detalhes.css' %}">
   
-<div class="title">
+<div class="p-3">
     <h1>{{turma}}</h1> 
 </div>
 <hr>
@@ -15,10 +15,10 @@
 <div class="container justify-content-center m-auto mt-5 mb-5">
         <div class="d-flex gap-2 flex-wrap p-3">
             {% for aluno in alunos %}
-                <div class="container aluno mb-4 shadow rounded-3">
-                    <h2>{{ aluno.nome }}</h2>
+                <div class="container aluno mb-4 border rounded-3 p-4">
+                    <h2 class="text-uppercase fw-bold">{{ aluno.nome }}</h2>
                     <small>{{ aluno.cpf }}</small>
-                    <button class="btn btn-info"><a class="text-decoration-none text-white" href="{% url 'aluno' aluno.id_aluno %}">Detalhes</a></button>
+                    <button class="btn btn-info ms-3"><a class="text-decoration-none text-white" href="{% url 'aluno' aluno.id_aluno %}">Detalhes</a></button>
                 </div>
             {% endfor %}
         </div>
