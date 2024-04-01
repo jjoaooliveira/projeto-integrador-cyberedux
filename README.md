@@ -13,7 +13,7 @@
 <img src="img/evision.png" width="150px">
 
 <!-- Substitua o seguinte parágrafo por um resumo do seu projeto: -->
-E-Vision é um sistema de gestão acadêmica com recursos únicos. O sistema permite dois tipos de usuário: Professor e Administrador do sistema, onde cada tipo de usuário apresenta capacidades e restrições.  
+E-Vision é um sistema de gestão acadêmica com recursos únicos onde é gerenciar cursos e disciplinas cadastradas, bem como alunos, usuários do sistema e professores. O sistema permite dois tipos de usuário: Professor e Administrador do sistema. O sistema também apresenta recursos de CRUD e uma seção para administradores onde é possível ter uma visão geral da situação da instituição por meio de gráficos que trazem métricas sobre os cursos, disciplinas e alunos.
 
 ## Documentação
 
