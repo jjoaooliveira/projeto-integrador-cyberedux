@@ -1,6 +1,6 @@
 # Instruções de uso
 
-Para ter acesso ao sistema utilize uma das seguinter credenciais:
+Para ter acesso ao sistema utilize uma das seguintes credenciais:
   - Professor:
     - Usuario: Paulo - Senha: q12345werT
 
