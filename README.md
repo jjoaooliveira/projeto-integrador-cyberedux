@@ -3,16 +3,17 @@
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
 ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
+![Javascript](https://img.shields.io/badge/javascript-grey?style=for-the-badge&logo=javascript)
 
 **Este projeto foi desenvolvido como atividade final do curso de capacitação em Python da Cyber Edux, realizado de setembro de 2023 até março de 2024. Para mais informações, consulte o [enunciado](ENUNCIADO.md).**
 
-# Nome do Projeto
+# E-Vision
 
 <!-- Substitua a seguinte imagem por uma logo do seu projeto -->
-<img src="img/logo.png" width="150px">
+<img src="img/evision.png" width="150px">
 
 <!-- Substitua o seguinte parágrafo por um resumo do seu projeto: -->
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+E-Vision é um sistema de gestão acadêmica com recursos únicos. O sistema permite dois tipos de usuário: Professor e Administrador do sistema, onde cada tipo de usuário apresenta capacidades e restrições.  
 
 ## Documentação
 
