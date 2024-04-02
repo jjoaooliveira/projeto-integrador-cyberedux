@@ -13,7 +13,7 @@
 <img src="img/evision.png" width="150px">
 
 <!-- Substitua o seguinte parágrafo por um resumo do seu projeto: -->
-E-Vision é um sistema de gestão acadêmica com recursos únicos. O sistema permite dois tipos de usuário: Professor e Administrador do sistema, onde cada tipo de usuário apresenta capacidades e restrições.  
+E-Vision é um sistema de gestão acadêmica com recursos únicos onde é gerenciar cursos e disciplinas cadastradas, bem como alunos, usuários do sistema e professores. O sistema permite dois tipos de usuário: Professor e Administrador do sistema. O sistema também apresenta recursos de CRUD e uma seção para administradores onde é possível ter uma visão geral da situação da instituição por meio de gráficos que trazem métricas sobre os cursos, disciplinas e alunos.
 
 ## Documentação
 
@@ -25,4 +25,4 @@ E-Vision é um sistema de gestão acadêmica com recursos únicos. O sistema per
 <!-- Coloque seu nome, uma foto sua e uma pequena bio sobre você na seguinte tabela: -->
 |  |  |
 |:-------------:|:------------------------------------------------------------:|
-|  <img src="img/profilepic.png" width="150px"></br> **Nome do Autor** | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. |
+|  <img src="https://github.com/jjoaooliveira.png" width="150px"></br> **João Oliveira** | Meu nome é João Oliveira, sou estudante de Ciência da Computação, autodidata e apaixonado por tecnologia. Atualmente focado no desenvolvimento Web, utilizo tecnologias como Javascript, Python, Django, Node.js e Postgresql. Estou sempre buscando me aperfeiçoar. |

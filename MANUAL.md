@@ -1,3 +1,8 @@
 # Instruções de uso
 
-Aqui, você deve elaborar um "guia" para **usuários**. Explique como a interface gráfica deve ser utilizada.
+Para ter acesso ao sistema utilize uma das seguintes credenciais:
+  - Professor:
+    - Usuario: Paulo - Senha: q12345werT
+
+  - Administrador do sistema:
+    - Usuario: joaoadmin - Senha: 123
