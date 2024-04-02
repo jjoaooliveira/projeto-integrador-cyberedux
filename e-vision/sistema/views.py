@@ -29,6 +29,7 @@ def lista_presenca(request, turma_id):
 
 @login_required(login_url='login')
 def cadastro_presenca(request, aula_id, turma_id):
+   
     if request.method == "POST":
         form = FormPresenca(request.POST)
 
@@ -39,11 +40,12 @@ def cadastro_presenca(request, aula_id, turma_id):
                 aluno = form.cleaned_data['aluno']
             )
             presenca.save()
-           
             return HttpResponseRedirect(reverse('aulas', args=[turma_id]))
         
     form = FormPresenca()
-    return render(request, 'cadastro-presenca.html', {'form': form, 'turma': turma_id, 'aula': aula_id})
+    alunos_turma = Turma.objects.filter(id=turma_id).values_list('alunos', flat=True)
+    alunos = Aluno.objects.filter(id_aluno__in=alunos_turma)
+    return render(request, 'cadastro-presenca.html', {'alunos': alunos, 'turma': turma_id, 'aula': aula_id})
 
 
 @login_required(login_url='login')
@@ -56,17 +58,17 @@ def editar_presenca(request, presenca_id, turma_id):
         presenca.aluno= aluno[0]
         presenca.presente = form.cleaned_data['presente']
         presenca.save()
-        
         return HttpResponseRedirect(reverse('presencas', args=[turma_id]))
 
-    return render(request, 'editar-presenca.html', {'form': form, 'turma': turma_id, 'presenca': presenca_id})
+    alunos_turma = Turma.objects.filter(id=turma_id).values_list('alunos', flat=True)
+    alunos = Aluno.objects.filter(id_aluno__in=alunos_turma).exclude(id_aluno=presenca.aluno.id_aluno)
+    return render(request, 'editar-presenca.html', {'alunos': alunos, 'turma': turma_id, 'presenca': presenca})
 
 
 @login_required(login_url='login')
 def delete_presenca(request, presenca_id, turma_id):
     presenca = Presenca.objects.get(pk=presenca_id)
     presenca.delete()
-
     return HttpResponseRedirect(reverse('presencas', args=[turma_id]))
 
 
@@ -77,6 +79,7 @@ def aluno(request, aluno_id):
 
 @login_required(login_url='login')
 def cadastro_aula(request, turma_id):
+    
     if request.method == 'POST':
         form = FormAula(request.POST)
 
@@ -87,7 +90,6 @@ def cadastro_aula(request, turma_id):
                 data=form.cleaned_data['data']
             )
             aula.save()
-
             return HttpResponseRedirect(reverse('aulas', args=[turma_id]))
 
     form = FormAula()
@@ -103,11 +105,11 @@ def lista_aulas(request, turma_id):
 @login_required(login_url='login')
 def editar_aula(request, aula_id, turma_id):
     aula = Aula.objects.get(pk=aula_id)
+    data = aula.data.strftime("%Y-%m-%d")
     form = FormAula(request.POST or None, instance=aula)
 
     if form.is_valid():
         aula = form.save()
-
         return redirect(reverse('aulas', args=[turma_id]))
 
-    return render(request, 'editar-aula.html', {'turma': turma_id, 'aula': aula})
+    return render(request, 'editar-aula.html', {'turma': turma_id, 'aula': aula, 'data': data})

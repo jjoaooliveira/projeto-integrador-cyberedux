@@ -7,6 +7,7 @@ class FormAula(forms.ModelForm):
         fields = [
             'data',
         ]
+        
 
 class FormPresenca(forms.ModelForm):
     class Meta:

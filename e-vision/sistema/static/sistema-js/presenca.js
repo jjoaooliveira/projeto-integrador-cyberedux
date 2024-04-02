@@ -1,5 +1,6 @@
 const form = document.querySelector('form');
-const data = document.getElementById('data');
+const presente = document.getElementById('presente');
+const aluno = document.getElementById('aluno');
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -7,23 +8,23 @@ form.addEventListener('submit', (event) => {
     checkForm();
 })
 
-data.addEventListener('blur', () => {
-    checkData();
+aluno.addEventListener('blur', () => {
+    checkAluno();
 })
 
-function checkData() {
-    const dataValue = data.value;
+function checkAluno() {
+    const alunoValue = aluno.value;
 
-    if(dataValue === ''){
-        errorInput(data, 'defina uma data');
+    if(alunoValue === '#'){
+        errorInput(aluno, 'selecione um aluno');
     } else {
-        data.parentElement.classList.remove('erro')
+        aluno.parentElement.classList.remove('erro')
     }
     
 }
 
 function checkForm() {
-    checkData();
+    checkAluno();
 
     const formItens = form.querySelectorAll('.form-content');
     const notValid = [...formItens].some(item => item.classList.contains('erro'))

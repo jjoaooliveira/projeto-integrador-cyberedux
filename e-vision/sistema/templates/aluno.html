@@ -1,38 +1,89 @@
-{% extends "base-sistema/base.html" %}
-{% load plotly_dash %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
 
-{% block title %}
-{% endblock title %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <title>Aluno</title>
+</head>
 
-{% block content %}
-    <div class="container m-auto overflow-x-auto" >
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">CPF</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Endereço</th>
-                    <th scope="col">telefone</th>
-                    <th scope="col">Condição Financeira</th>
-                    <th scope="col">Escolaridade</th>
-                    <th scope="col">Trabalha</th>
-                </tr>
-            </thead>
-            <tbody class="table-group-divider"> 
-                <tr>
-                    <th scope="row">{{ aluno.id_aluno }}</th>
-                    <td>{{ aluno.nome }}</td>
-                    <td>{{ aluno.cpf }}</td>
-                    <td>{{ aluno.email }}</td>
-                    <td>{{ aluno.endereco }}</td>
-                    <td>{{ aluno.telefone }}</td>
-                    <td>{{ aluno.condicao_financeira }}</td>
-                    <td>{{ aluno.escolaridade }}</td>
-                    <td>{{ aluno.trabalha }}</td>
-                </tr>   
-            </tbody>
-        </table>
-</div>
-{% endblock content %}
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-primary text-uppercase">
+            <div class="container-fluid">
+                <a class="navbar-brand text-light material-symbols-outlined po" onclick="history.back()">reply</a>
+                <a class="navbar-brand text-light" href="{% url 'home' %}">E-Vision</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" aria-current="page" href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-light" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                {{request.user}}
+                            </a>
+                            <ul class="dropdown-menu text-light">
+                                <li><a class="dropdown-item" href="#">Perfil</a></li>
+                                <li><a class="dropdown-item" href="#">Configurações</a></li>
+                            </ul>
+                        </li>
+                        {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="{% url 'logout' %}">Sair</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <body>
+        <div class="container m-auto overflow-x-auto">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">CPF</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Endereço</th>
+                        <th scope="col">telefone</th>
+                        <th scope="col">Condição Financeira</th>
+                        <th scope="col">Escolaridade</th>
+                        <th scope="col">Trabalha</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <tr>
+                        <th scope="row">{{ aluno.id_aluno }}</th>
+                        <td>{{ aluno.nome }}</td>
+                        <td>{{ aluno.cpf }}</td>
+                        <td>{{ aluno.email }}</td>
+                        <td>{{ aluno.endereco }}</td>
+                        <td>{{ aluno.telefone }}</td>
+                        <td>{{ aluno.condicao_financeira }}</td>
+                        <td>{{ aluno.escolaridade }}</td>
+                        <td>{{ aluno.trabalha }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
+    </body>
+
+</html>
